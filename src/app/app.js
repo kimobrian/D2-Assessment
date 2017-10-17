@@ -1,5 +1,6 @@
 import angular from 'angular';
 import HouseModule from './houses'
+import '../style/app.scss';
 
 class AppCtrl  {
 
