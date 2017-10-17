@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 
-class FirebaseService {
+class HousesService {
   constructor(){
     'ngInject';
     firebase.initializeApp({
@@ -17,19 +17,17 @@ class FirebaseService {
     this.firebaseRef = this.db.ref('houses/');
   }
 
-  createHouse(name) {
-
+  createHouse(name, bedrooms) {
+      return this.firebaseRef.push({name: name, bedrooms: bedrooms});
   }
 
   deleteHouse(houseID) {
-
+      return this.firebaseRef.child(houseID).remove();
   }
 
-  updateHouse(houseID) {
-
-  }
-
-  listHouses() {
-
+  updateHouse(houseID, newHouseName, newBedRoomsNumber) {
+      return this.firebaseRef.child(houseID).update({ name: newHouseName, bedrooms: newBedRoomsNumber });
   }
 }
+
+module.exports = HousesService;
