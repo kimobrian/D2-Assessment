@@ -1,8 +1,24 @@
-<h4>Houses Component</h4>
-
 <div class="row">
-    <div class="col-lg-4 col-lg-offset-4">
-        <input type="text" class="form-control" placeholder="House Name" ng-model="vm.houseName"><br/>
-        <button type="button" class="btn btn-primary btn-sm">Add House</button>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <h4>Add a New House</h4>
+            <input type="text" class="form-control" placeholder="House Name" ng-model="vm.houseName"><br/>
+            <input type="number" class="form-control" placeholder="Bedrooms" ng-model="vm.bedrooms"><br/>
+            <button type="button" class="btn btn-primary btn-sm" ng-click="vm.createNewHouse(vm.houseName, vm.bedrooms)">Add House</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <h4>House List</h4>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="(key, house) in vm.houses">
+                    <span ng-dblclick="vm.toggleEditHouse(key, house)">{{house.name}}</span> <span class="pull-right delete" ng-click="vm.deleteHouse(key)"> X</span> <span class="pull-right">{{house.bedrooms}} bedrooms</span>
+                    <div ng-if="vm.editing === key">
+                        <input type="text" placeholder="House Name" class="form-control" ng-model="vm.newHouseName" ng-keypress="vm.updateHouse($event,key)"> <br/>
+                        <input type="number" placeholder="Bedrooms" class="form-control" ng-mode="vm.newBedRoomsNumber" ng-keypress="vm.updateHouse($event,key)"><br/>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
